@@ -1,62 +1,101 @@
 
 import csv
+from pathlib import Path
 
-CSV_FILE = "emails_labeled.csv"
+# CSV file is in the same folder as this script
+CSV_FILE = Path(__file__).with_name("emails_labeled.csv")
 
-REQUIRED_COLUMNS = {"email_id", "email_text", "category"}
+# Required column headings
+REQUIRED_COLUMNS = [
+    "email_id",
+    "subject",
+    "body",
+    "category"
+]
 
-ALLOWED_CATEGORIES = {
+# Exactly four allowed category labels
+EXPECTED_CATEGORIES = {
     "Missed Pickup",
     "Schedule Change",
     "Complaint",
-    "Other",
+    "Other"
 }
 
 
 def validate_csv():
-    try:
-        with open(CSV_FILE, "r", newline="", encoding="utf-8-sig") as file:
-            reader = csv.DictReader(file)
 
-            columns = set(reader.fieldnames or [])
-            missing_columns = REQUIRED_COLUMNS - columns
+    # Check that the CSV file exists
+    if not CSV_FILE.exists():
+        raise FileNotFoundError(
+            f"CSV file not found: {CSV_FILE}"
+        )
 
-            if missing_columns:
-                print("Missing columns:", sorted(missing_columns))
-                return False
+    # Read the CSV file
+    with CSV_FILE.open("r", newline="", encoding="utf-8") as file:
+        reader = csv.DictReader(file)
 
-            rows = list(reader)
+        # Check required columns
+        columns = reader.fieldnames or []
 
-        if len(rows) < 200:
-            print(f"Error: Only {len(rows)} rows found. Need at least 200.")
-            return False
+        missing_columns = [
+            column
+            for column in REQUIRED_COLUMNS
+            if column not in columns
+        ]
 
-        categories = {row["category"].strip() for row in rows}
+        if missing_columns:
+            raise AssertionError(
+                f"Missing required fields: {missing_columns}"
+            )
 
-        invalid_categories = categories - ALLOWED_CATEGORIES
+        # Read all rows
+        rows = list(reader)
 
-        if invalid_categories:
-            print("Invalid categories:", sorted(invalid_categories))
-            return False
+    # Check minimum number of rows
+    if len(rows) < 200:
+        raise AssertionError(
+            f"Dataset contains only {len(rows)} rows. "
+            "At least 200 rows are required."
+        )
 
-        if categories != ALLOWED_CATEGORIES:
-            print("Error: Dataset must contain all four categories.")
-            return False
+    # Get all category labels
+    categories = {
+        row["category"].strip()
+        for row in rows
+        if row["category"]
+    }
 
-        for number, row in enumerate(rows, start=2):
-            if not row["email_text"].strip():
-                print(f"Error: Empty email text on CSV line {number}.")
-                return False
+    # Check exactly four category labels
+    if categories != EXPECTED_CATEGORIES:
+        raise AssertionError(
+            "Category labels are incorrect.\n"
+            f"Expected: {sorted(EXPECTED_CATEGORIES)}\n"
+            f"Found: {sorted(categories)}"
+        )
 
-        print("CSV validation passed!")
-        print(f"Total emails: {len(rows)}")
-        print("All four required categories are present.")
-        return True
+    # Check for empty required fields
+    empty_fields = []
 
-    except FileNotFoundError:
-        print(f"Error: {CSV_FILE} was not found.")
-        return False
+    for row_number, row in enumerate(rows, start=2):
+        for column in REQUIRED_COLUMNS:
+            if not row[column].strip():
+                empty_fields.append(
+                    f"Row {row_number}: {column}"
+                )
+
+    if empty_fields:
+        raise AssertionError(
+            "Empty required fields found:\n"
+            + "\n".join(empty_fields)
+        )
+
+    # Everything passed
+    print("CSV validation passed!")
+    print(f"Rows: {len(rows)}")
+    print(f"Columns: {columns}")
+    print(f"Categories: {sorted(categories)}")
 
 
 if __name__ == "__main__":
-    assert validate_csv(), "CSV validation failed."
+    validate_csv()
+
