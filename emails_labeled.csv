@@ -1,0 +1,221 @@
+email_id,email_text,category
+1,Our household bins were not collected on the scheduled day.,Missed Pickup
+2,Our household bins were not collected on the scheduled day. I live in a small apartment building.,Missed Pickup
+3,Our household bins were not collected on the scheduled day. This concerns our residential street.,Missed Pickup
+4,Our household bins were not collected on the scheduled day. Several neighbors have asked about this too.,Missed Pickup
+5,Our household bins were not collected on the scheduled day. I am contacting you on behalf of our household.,Missed Pickup
+6,Our household bins were not collected on the scheduled day. The issue is at our shared collection point.,Missed Pickup
+7,Our household bins were not collected on the scheduled day. Please provide guidance when you have a chance.,Missed Pickup
+8,Our household bins were not collected on the scheduled day. We would appreciate a response by email.,Missed Pickup
+9,Our household bins were not collected on the scheduled day. I am trying to plan our household waste arrangements.,Missed Pickup
+10,Our household bins were not collected on the scheduled day. This has come up during our regular waste routine.,Missed Pickup
+11,Our household bins were not collected on the scheduled day. Thank you for looking into this request.,Missed Pickup
+12,"The recycling truck skipped our street this morning, and the bins are still full.",Missed Pickup
+13,"The recycling truck skipped our street this morning, and the bins are still full. I live in a small apartment building.",Missed Pickup
+14,"The recycling truck skipped our street this morning, and the bins are still full. This concerns our residential street.",Missed Pickup
+15,"The recycling truck skipped our street this morning, and the bins are still full. Several neighbors have asked about this too.",Missed Pickup
+16,"The recycling truck skipped our street this morning, and the bins are still full. I am contacting you on behalf of our household.",Missed Pickup
+17,"The recycling truck skipped our street this morning, and the bins are still full. The issue is at our shared collection point.",Missed Pickup
+18,"The recycling truck skipped our street this morning, and the bins are still full. Please provide guidance when you have a chance.",Missed Pickup
+19,"The recycling truck skipped our street this morning, and the bins are still full. We would appreciate a response by email.",Missed Pickup
+20,"The recycling truck skipped our street this morning, and the bins are still full. I am trying to plan our household waste arrangements.",Missed Pickup
+21,"The recycling truck skipped our street this morning, and the bins are still full. This has come up during our regular waste routine.",Missed Pickup
+22,"The recycling truck skipped our street this morning, and the bins are still full. Thank you for looking into this request.",Missed Pickup
+23,Our rubbish has been outside since yesterday because the scheduled pickup never arrived.,Missed Pickup
+24,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. I live in a small apartment building.,Missed Pickup
+25,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. This concerns our residential street.,Missed Pickup
+26,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. Several neighbors have asked about this too.,Missed Pickup
+27,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. I am contacting you on behalf of our household.,Missed Pickup
+28,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. The issue is at our shared collection point.,Missed Pickup
+29,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. Please provide guidance when you have a chance.,Missed Pickup
+30,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. We would appreciate a response by email.,Missed Pickup
+31,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. I am trying to plan our household waste arrangements.,Missed Pickup
+32,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. This has come up during our regular waste routine.,Missed Pickup
+33,Our rubbish has been outside since yesterday because the scheduled pickup never arrived. Thank you for looking into this request.,Missed Pickup
+34,The collection crew passed our building without emptying the shared bins.,Missed Pickup
+35,The collection crew passed our building without emptying the shared bins. I live in a small apartment building.,Missed Pickup
+36,The collection crew passed our building without emptying the shared bins. This concerns our residential street.,Missed Pickup
+37,The collection crew passed our building without emptying the shared bins. Several neighbors have asked about this too.,Missed Pickup
+38,The collection crew passed our building without emptying the shared bins. I am contacting you on behalf of our household.,Missed Pickup
+39,The collection crew passed our building without emptying the shared bins. The issue is at our shared collection point.,Missed Pickup
+40,The collection crew passed our building without emptying the shared bins. Please provide guidance when you have a chance.,Missed Pickup
+41,The collection crew passed our building without emptying the shared bins. We would appreciate a response by email.,Missed Pickup
+42,The collection crew passed our building without emptying the shared bins. I am trying to plan our household waste arrangements.,Missed Pickup
+43,The collection crew passed our building without emptying the shared bins. This has come up during our regular waste routine.,Missed Pickup
+44,The collection crew passed our building without emptying the shared bins. Thank you for looking into this request.,Missed Pickup
+45,"Garden waste was due today, but nobody collected it.",Missed Pickup
+46,"Garden waste was due today, but nobody collected it. I live in a small apartment building.",Missed Pickup
+47,"Garden waste was due today, but nobody collected it. This concerns our residential street.",Missed Pickup
+48,"Garden waste was due today, but nobody collected it. Several neighbors have asked about this too.",Missed Pickup
+49,"Garden waste was due today, but nobody collected it. I am contacting you on behalf of our household.",Missed Pickup
+50,"Garden waste was due today, but nobody collected it. The issue is at our shared collection point.",Missed Pickup
+51,"Garden waste was due today, but nobody collected it. Please provide guidance when you have a chance.",Missed Pickup
+52,"Garden waste was due today, but nobody collected it. We would appreciate a response by email.",Missed Pickup
+53,"Garden waste was due today, but nobody collected it. I am trying to plan our household waste arrangements.",Missed Pickup
+54,"Garden waste was due today, but nobody collected it. This has come up during our regular waste routine.",Missed Pickup
+55,"Garden waste was due today, but nobody collected it. Thank you for looking into this request.",Missed Pickup
+56,Could you confirm whether our collection day changes next week?,Schedule Change
+57,Could you confirm whether our collection day changes next week? I live in a small apartment building.,Schedule Change
+58,Could you confirm whether our collection day changes next week? This concerns our residential street.,Schedule Change
+59,Could you confirm whether our collection day changes next week? Several neighbors have asked about this too.,Schedule Change
+60,Could you confirm whether our collection day changes next week? I am contacting you on behalf of our household.,Schedule Change
+61,Could you confirm whether our collection day changes next week? The issue is at our shared collection point.,Schedule Change
+62,Could you confirm whether our collection day changes next week? Please provide guidance when you have a chance.,Schedule Change
+63,Could you confirm whether our collection day changes next week? We would appreciate a response by email.,Schedule Change
+64,Could you confirm whether our collection day changes next week? I am trying to plan our household waste arrangements.,Schedule Change
+65,Could you confirm whether our collection day changes next week? This has come up during our regular waste routine.,Schedule Change
+66,Could you confirm whether our collection day changes next week? Thank you for looking into this request.,Schedule Change
+67,Is rubbish pickup delayed because of the public holiday?,Schedule Change
+68,Is rubbish pickup delayed because of the public holiday? I live in a small apartment building.,Schedule Change
+69,Is rubbish pickup delayed because of the public holiday? This concerns our residential street.,Schedule Change
+70,Is rubbish pickup delayed because of the public holiday? Several neighbors have asked about this too.,Schedule Change
+71,Is rubbish pickup delayed because of the public holiday? I am contacting you on behalf of our household.,Schedule Change
+72,Is rubbish pickup delayed because of the public holiday? The issue is at our shared collection point.,Schedule Change
+73,Is rubbish pickup delayed because of the public holiday? Please provide guidance when you have a chance.,Schedule Change
+74,Is rubbish pickup delayed because of the public holiday? We would appreciate a response by email.,Schedule Change
+75,Is rubbish pickup delayed because of the public holiday? I am trying to plan our household waste arrangements.,Schedule Change
+76,Is rubbish pickup delayed because of the public holiday? This has come up during our regular waste routine.,Schedule Change
+77,Is rubbish pickup delayed because of the public holiday? Thank you for looking into this request.,Schedule Change
+78,Please tell us the new recycling collection time for this month.,Schedule Change
+79,Please tell us the new recycling collection time for this month. I live in a small apartment building.,Schedule Change
+80,Please tell us the new recycling collection time for this month. This concerns our residential street.,Schedule Change
+81,Please tell us the new recycling collection time for this month. Several neighbors have asked about this too.,Schedule Change
+82,Please tell us the new recycling collection time for this month. I am contacting you on behalf of our household.,Schedule Change
+83,Please tell us the new recycling collection time for this month. The issue is at our shared collection point.,Schedule Change
+84,Please tell us the new recycling collection time for this month. Please provide guidance when you have a chance.,Schedule Change
+85,Please tell us the new recycling collection time for this month. We would appreciate a response by email.,Schedule Change
+86,Please tell us the new recycling collection time for this month. I am trying to plan our household waste arrangements.,Schedule Change
+87,Please tell us the new recycling collection time for this month. This has come up during our regular waste routine.,Schedule Change
+88,Please tell us the new recycling collection time for this month. Thank you for looking into this request.,Schedule Change
+89,Will the usual Tuesday service move to Wednesday during the holiday?,Schedule Change
+90,Will the usual Tuesday service move to Wednesday during the holiday? I live in a small apartment building.,Schedule Change
+91,Will the usual Tuesday service move to Wednesday during the holiday? This concerns our residential street.,Schedule Change
+92,Will the usual Tuesday service move to Wednesday during the holiday? Several neighbors have asked about this too.,Schedule Change
+93,Will the usual Tuesday service move to Wednesday during the holiday? I am contacting you on behalf of our household.,Schedule Change
+94,Will the usual Tuesday service move to Wednesday during the holiday? The issue is at our shared collection point.,Schedule Change
+95,Will the usual Tuesday service move to Wednesday during the holiday? Please provide guidance when you have a chance.,Schedule Change
+96,Will the usual Tuesday service move to Wednesday during the holiday? We would appreciate a response by email.,Schedule Change
+97,Will the usual Tuesday service move to Wednesday during the holiday? I am trying to plan our household waste arrangements.,Schedule Change
+98,Will the usual Tuesday service move to Wednesday during the holiday? This has come up during our regular waste routine.,Schedule Change
+99,Will the usual Tuesday service move to Wednesday during the holiday? Thank you for looking into this request.,Schedule Change
+100,Where can residents find the updated waste collection calendar?,Schedule Change
+101,Where can residents find the updated waste collection calendar? I live in a small apartment building.,Schedule Change
+102,Where can residents find the updated waste collection calendar? This concerns our residential street.,Schedule Change
+103,Where can residents find the updated waste collection calendar? Several neighbors have asked about this too.,Schedule Change
+104,Where can residents find the updated waste collection calendar? I am contacting you on behalf of our household.,Schedule Change
+105,Where can residents find the updated waste collection calendar? The issue is at our shared collection point.,Schedule Change
+106,Where can residents find the updated waste collection calendar? Please provide guidance when you have a chance.,Schedule Change
+107,Where can residents find the updated waste collection calendar? We would appreciate a response by email.,Schedule Change
+108,Where can residents find the updated waste collection calendar? I am trying to plan our household waste arrangements.,Schedule Change
+109,Where can residents find the updated waste collection calendar? This has come up during our regular waste routine.,Schedule Change
+110,Where can residents find the updated waste collection calendar? Thank you for looking into this request.,Schedule Change
+111,I am unhappy that the crew repeatedly leaves litter scattered around the bins.,Complaint
+112,I am unhappy that the crew repeatedly leaves litter scattered around the bins. I live in a small apartment building.,Complaint
+113,I am unhappy that the crew repeatedly leaves litter scattered around the bins. This concerns our residential street.,Complaint
+114,I am unhappy that the crew repeatedly leaves litter scattered around the bins. Several neighbors have asked about this too.,Complaint
+115,I am unhappy that the crew repeatedly leaves litter scattered around the bins. I am contacting you on behalf of our household.,Complaint
+116,I am unhappy that the crew repeatedly leaves litter scattered around the bins. The issue is at our shared collection point.,Complaint
+117,I am unhappy that the crew repeatedly leaves litter scattered around the bins. Please provide guidance when you have a chance.,Complaint
+118,I am unhappy that the crew repeatedly leaves litter scattered around the bins. We would appreciate a response by email.,Complaint
+119,I am unhappy that the crew repeatedly leaves litter scattered around the bins. I am trying to plan our household waste arrangements.,Complaint
+120,I am unhappy that the crew repeatedly leaves litter scattered around the bins. This has come up during our regular waste routine.,Complaint
+121,I am unhappy that the crew repeatedly leaves litter scattered around the bins. Thank you for looking into this request.,Complaint
+122,The workers handled our bins roughly and damaged the lid.,Complaint
+123,The workers handled our bins roughly and damaged the lid. I live in a small apartment building.,Complaint
+124,The workers handled our bins roughly and damaged the lid. This concerns our residential street.,Complaint
+125,The workers handled our bins roughly and damaged the lid. Several neighbors have asked about this too.,Complaint
+126,The workers handled our bins roughly and damaged the lid. I am contacting you on behalf of our household.,Complaint
+127,The workers handled our bins roughly and damaged the lid. The issue is at our shared collection point.,Complaint
+128,The workers handled our bins roughly and damaged the lid. Please provide guidance when you have a chance.,Complaint
+129,The workers handled our bins roughly and damaged the lid. We would appreciate a response by email.,Complaint
+130,The workers handled our bins roughly and damaged the lid. I am trying to plan our household waste arrangements.,Complaint
+131,The workers handled our bins roughly and damaged the lid. This has come up during our regular waste routine.,Complaint
+132,The workers handled our bins roughly and damaged the lid. Thank you for looking into this request.,Complaint
+133,The collection service is noisy before dawn and wakes residents.,Complaint
+134,The collection service is noisy before dawn and wakes residents. I live in a small apartment building.,Complaint
+135,The collection service is noisy before dawn and wakes residents. This concerns our residential street.,Complaint
+136,The collection service is noisy before dawn and wakes residents. Several neighbors have asked about this too.,Complaint
+137,The collection service is noisy before dawn and wakes residents. I am contacting you on behalf of our household.,Complaint
+138,The collection service is noisy before dawn and wakes residents. The issue is at our shared collection point.,Complaint
+139,The collection service is noisy before dawn and wakes residents. Please provide guidance when you have a chance.,Complaint
+140,The collection service is noisy before dawn and wakes residents. We would appreciate a response by email.,Complaint
+141,The collection service is noisy before dawn and wakes residents. I am trying to plan our household waste arrangements.,Complaint
+142,The collection service is noisy before dawn and wakes residents. This has come up during our regular waste routine.,Complaint
+143,The collection service is noisy before dawn and wakes residents. Thank you for looking into this request.,Complaint
+144,"Our bins are often returned blocking the pavement, which is frustrating.",Complaint
+145,"Our bins are often returned blocking the pavement, which is frustrating. I live in a small apartment building.",Complaint
+146,"Our bins are often returned blocking the pavement, which is frustrating. This concerns our residential street.",Complaint
+147,"Our bins are often returned blocking the pavement, which is frustrating. Several neighbors have asked about this too.",Complaint
+148,"Our bins are often returned blocking the pavement, which is frustrating. I am contacting you on behalf of our household.",Complaint
+149,"Our bins are often returned blocking the pavement, which is frustrating. The issue is at our shared collection point.",Complaint
+150,"Our bins are often returned blocking the pavement, which is frustrating. Please provide guidance when you have a chance.",Complaint
+151,"Our bins are often returned blocking the pavement, which is frustrating. We would appreciate a response by email.",Complaint
+152,"Our bins are often returned blocking the pavement, which is frustrating. I am trying to plan our household waste arrangements.",Complaint
+153,"Our bins are often returned blocking the pavement, which is frustrating. This has come up during our regular waste routine.",Complaint
+154,"Our bins are often returned blocking the pavement, which is frustrating. Thank you for looking into this request.",Complaint
+155,The crew left spilled rubbish on the sidewalk and did not clean it up.,Complaint
+156,The crew left spilled rubbish on the sidewalk and did not clean it up. I live in a small apartment building.,Complaint
+157,The crew left spilled rubbish on the sidewalk and did not clean it up. This concerns our residential street.,Complaint
+158,The crew left spilled rubbish on the sidewalk and did not clean it up. Several neighbors have asked about this too.,Complaint
+159,The crew left spilled rubbish on the sidewalk and did not clean it up. I am contacting you on behalf of our household.,Complaint
+160,The crew left spilled rubbish on the sidewalk and did not clean it up. The issue is at our shared collection point.,Complaint
+161,The crew left spilled rubbish on the sidewalk and did not clean it up. Please provide guidance when you have a chance.,Complaint
+162,The crew left spilled rubbish on the sidewalk and did not clean it up. We would appreciate a response by email.,Complaint
+163,The crew left spilled rubbish on the sidewalk and did not clean it up. I am trying to plan our household waste arrangements.,Complaint
+164,The crew left spilled rubbish on the sidewalk and did not clean it up. This has come up during our regular waste routine.,Complaint
+165,The crew left spilled rubbish on the sidewalk and did not clean it up. Thank you for looking into this request.,Complaint
+166,How can I request an additional recycling bin for my household?,Other
+167,How can I request an additional recycling bin for my household? I live in a small apartment building.,Other
+168,How can I request an additional recycling bin for my household? This concerns our residential street.,Other
+169,How can I request an additional recycling bin for my household? Several neighbors have asked about this too.,Other
+170,How can I request an additional recycling bin for my household? I am contacting you on behalf of our household.,Other
+171,How can I request an additional recycling bin for my household? The issue is at our shared collection point.,Other
+172,How can I request an additional recycling bin for my household? Please provide guidance when you have a chance.,Other
+173,How can I request an additional recycling bin for my household? We would appreciate a response by email.,Other
+174,How can I request an additional recycling bin for my household? I am trying to plan our household waste arrangements.,Other
+175,How can I request an additional recycling bin for my household? This has come up during our regular waste routine.,Other
+176,How can I request an additional recycling bin for my household? Thank you for looking into this request.,Other
+177,Where should residents take batteries that cannot go in ordinary rubbish?,Other
+178,Where should residents take batteries that cannot go in ordinary rubbish? I live in a small apartment building.,Other
+179,Where should residents take batteries that cannot go in ordinary rubbish? This concerns our residential street.,Other
+180,Where should residents take batteries that cannot go in ordinary rubbish? Several neighbors have asked about this too.,Other
+181,Where should residents take batteries that cannot go in ordinary rubbish? I am contacting you on behalf of our household.,Other
+182,Where should residents take batteries that cannot go in ordinary rubbish? The issue is at our shared collection point.,Other
+183,Where should residents take batteries that cannot go in ordinary rubbish? Please provide guidance when you have a chance.,Other
+184,Where should residents take batteries that cannot go in ordinary rubbish? We would appreciate a response by email.,Other
+185,Where should residents take batteries that cannot go in ordinary rubbish? I am trying to plan our household waste arrangements.,Other
+186,Where should residents take batteries that cannot go in ordinary rubbish? This has come up during our regular waste routine.,Other
+187,Where should residents take batteries that cannot go in ordinary rubbish? Thank you for looking into this request.,Other
+188,Could you explain which plastics are accepted in the recycling bin?,Other
+189,Could you explain which plastics are accepted in the recycling bin? I live in a small apartment building.,Other
+190,Could you explain which plastics are accepted in the recycling bin? This concerns our residential street.,Other
+191,Could you explain which plastics are accepted in the recycling bin? Several neighbors have asked about this too.,Other
+192,Could you explain which plastics are accepted in the recycling bin? I am contacting you on behalf of our household.,Other
+193,Could you explain which plastics are accepted in the recycling bin? The issue is at our shared collection point.,Other
+194,Could you explain which plastics are accepted in the recycling bin? Please provide guidance when you have a chance.,Other
+195,Could you explain which plastics are accepted in the recycling bin? We would appreciate a response by email.,Other
+196,Could you explain which plastics are accepted in the recycling bin? I am trying to plan our household waste arrangements.,Other
+197,Could you explain which plastics are accepted in the recycling bin? This has come up during our regular waste routine.,Other
+198,Could you explain which plastics are accepted in the recycling bin? Thank you for looking into this request.,Other
+199,What is the process for requesting a replacement bin?,Other
+200,What is the process for requesting a replacement bin? I live in a small apartment building.,Other
+201,What is the process for requesting a replacement bin? This concerns our residential street.,Other
+202,What is the process for requesting a replacement bin? Several neighbors have asked about this too.,Other
+203,What is the process for requesting a replacement bin? I am contacting you on behalf of our household.,Other
+204,What is the process for requesting a replacement bin? The issue is at our shared collection point.,Other
+205,What is the process for requesting a replacement bin? Please provide guidance when you have a chance.,Other
+206,What is the process for requesting a replacement bin? We would appreciate a response by email.,Other
+207,What is the process for requesting a replacement bin? I am trying to plan our household waste arrangements.,Other
+208,What is the process for requesting a replacement bin? This has come up during our regular waste routine.,Other
+209,What is the process for requesting a replacement bin? Thank you for looking into this request.,Other
+210,Where can I find guidance on disposing of old paint safely?,Other
+211,Where can I find guidance on disposing of old paint safely? I live in a small apartment building.,Other
+212,Where can I find guidance on disposing of old paint safely? This concerns our residential street.,Other
+213,Where can I find guidance on disposing of old paint safely? Several neighbors have asked about this too.,Other
+214,Where can I find guidance on disposing of old paint safely? I am contacting you on behalf of our household.,Other
+215,Where can I find guidance on disposing of old paint safely? The issue is at our shared collection point.,Other
+216,Where can I find guidance on disposing of old paint safely? Please provide guidance when you have a chance.,Other
+217,Where can I find guidance on disposing of old paint safely? We would appreciate a response by email.,Other
+218,Where can I find guidance on disposing of old paint safely? I am trying to plan our household waste arrangements.,Other
+219,Where can I find guidance on disposing of old paint safely? This has come up during our regular waste routine.,Other
+220,Where can I find guidance on disposing of old paint safely? Thank you for looking into this request.,Other
