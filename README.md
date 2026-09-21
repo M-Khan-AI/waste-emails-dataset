@@ -1,5 +1,4 @@
-# Citizen Email Dataset for Waste Collection
-
+# Waste Email dataset
 ## Overview
 
 This project contains a dataset of 200+ synthetic citizen emails related to waste collection services. Each email has been manually assigned to one of four categories:
