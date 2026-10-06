@@ -1,6 +1,6 @@
 """Email classifier that asks an LLM to pick one of four categories."""
 
-CATEGORIES = ["Billing", "Technical Support", "Sales", "General Inquiry"]
+CATEGORIES = ["Missed Pickup", "Schedule Change", "Complaint", "Other"]
 FALLBACK = "I don't know"
 MODEL = "gpt-4o-mini"
 
