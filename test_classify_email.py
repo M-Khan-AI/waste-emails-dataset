@@ -1,4 +1,3 @@
-
 from unittest.mock import patch
 
 import classify_email as ce
@@ -16,7 +15,6 @@ def test_typical_email_returns_category():
     assert result == "Missed Pickup"
     mock.assert_called_once()
 
-
 def test_schedule_change_returns_category():
     with patch.object(
         ce,
@@ -30,7 +28,6 @@ def test_schedule_change_returns_category():
     assert result == "Schedule Change"
     mock.assert_called_once()
 
-
 def test_complaint_returns_category():
     with patch.object(
         ce,
@@ -43,7 +40,6 @@ def test_complaint_returns_category():
 
     assert result == "Complaint"
     mock.assert_called_once()
-
 
 def test_other_returns_category():
     with patch.object(
@@ -106,3 +102,4 @@ def test_prompt_lists_all_categories_and_fallback():
         assert category in ce.SYSTEM_PROMPT
 
     assert ce.FALLBACK in ce.SYSTEM_PROMPT
+    
