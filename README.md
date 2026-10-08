@@ -1,97 +1,96 @@
-# Waste Email dataset
-## Overview
+# Email Classifier
 
-This project contains a dataset of 200+ synthetic citizen emails related to waste collection services. Each email has been manually assigned to one of four categories:
+A small Python module that uses an LLM (OpenAI `gpt-4o-mini`) to sort an email into one of four categories. If the model is unsure, or returns anything unexpected, the classifier returns `"I don't know"`.
 
-* Missed Pickup
-* Schedule Change
-* Complaint
-* Other
+## Categories
 
-## Dataset
+| Category | Typical email |
+|---|---|
+| `Missed Pickup` | "My garbage was not collected today." |
+| `Schedule Change` | "I want to change my collection day." |
+| `Complaint` | "The service is very poor." |
+| `Other` | "I would like some general information." |
+| `I don't know` (fallback) | Empty input, ambiguous email, or invalid model output |
 
-The dataset is stored in emails_labeled.csv
-
-The CSV contains two columns:
-
-| Column       | Description                                           |
-| ------------ | ----------------------------------------------------- |
-| `email_text` | The citizen's email or message about waste collection |
-| `label`      | The category assigned to the email                    |
-
-## Data Source
-
-The emails are synthetic examples created specifically for this project. They are realistic mock citizen messages about waste collection services and do not contain real citizens' personal information.
-
-## Categories and Labeling Guide
-
-### 1. Missed Pickup
-
-Use **Missed Pickup** when the citizen reports that their waste, garbage, recycling, or bin was not collected when it was expected to be collected.
-
-**Examples:**
-
-* "Our garbage was not collected yesterday."
-* "The truck skipped our street this morning."
-* "My bin is still full after today's collection."
-
-### 2. Schedule Change
-Use **Schedule Change** when the citizen asks about changing, moving, or confirming a collection date or schedule.
-
-**Examples:**
-* "Can my collection day be changed from Monday to Wednesday?"
-* "Has the pickup schedule changed this week?"
-* "When will our collection day be moved because of the holiday?"
-### 3. Complaint
-Use **Complaint** when the citizen expresses dissatisfaction with the waste collection service or reports a service-related problem that is primarily a complaint.
-
-**Examples:**
-
-* "I am unhappy with the poor collection service."
-* "The waste service in our area has been very disappointing."
-* "I want to complain about the repeated problems with garbage collection."
-
-### 4. Other
-
-Use **Other** when the email is related to waste collection but does not primarily describe a missed pickup, request a schedule change, or make a complaint.
-
-This category can include general questions, information requests, or other waste-service inquiries.
-
-**Examples:**
-
-* "What items are accepted for recycling?"
-* "What time does the collection truck normally arrive?"
-* "Where can I find information about recycling rules?"
-
-## Labeling Rules
-
-1. Assign exactly one label to each email.
-2. Choose the label based on the main purpose of the email.
-3. Use **Missed Pickup** when the main issue is that a scheduled collection did not happen.
-4. Use **Schedule Change** when the main purpose is changing, checking, or asking about a collection schedule.
-5. Use **Complaint** when the main purpose is expressing dissatisfaction or making a service complaint.
-6. Use **Other** for waste-collection questions that do not fit the other three categories.
-
-   Keep the four labels exactly as written:
-
-* `Missed Pickup`
-* `Schedule Change`
-* `Complaint`
-* `Other`
-
-## Dataset Validation
-The repository includes a Python validation script:
-
-The script checks:
-* Whether `emails_labeled.csv` exists
-* Whether the required columns are present
-* Whether each row contains an email and label
-* Whether the labels belong to the four allowed categories
-* Whether the dataset contains at least 200 rows
-
-## Project Files
-waste-emails-dataset
-│
-├── emails_labeled.csv
-├── validate_csv.py
+## Project structure
+.
+├── classify_email.py        # The classifier
+├── test_classify_email.py   # Unit tests (no network needed)
 └── README.md
+
+## Requirements
+
+- Python 3.8+
+- An OpenAI API key (only needed to classify real emails, not to run the tests)
+- The `openai` package (only needed for real use)
+- `pytest` (for running the tests)
+
+## Setup
+
+```bash
+pip install openai pytest
+export OPENAI_API_KEY="your-api-key-here"      # macOS / Linux
+# setx OPENAI_API_KEY "your-api-key-here"      # Windows
+```
+
+## Usage
+
+```python
+from classify_email import classify_email
+
+print(classify_email("You missed my bin again today!"))
+# Missed Pickup
+
+print(classify_email("Can we move my pickup to Friday?"))
+# Schedule Change
+
+print(classify_email(""))
+# I don't know
+```
+
+`classify_email(text)` always returns one of five strings: the four categories above or `"I don't know"`.
+
+## How it works
+
+1. **Empty check:** blank or whitespace-only input returns `"I don't know"` immediately, with no API call.
+2. **Ask the model:** the email is sent to `gpt-4o-mini` with a system prompt that lists the valid categories and asks for the exact category name only. `temperature=0` keeps answers consistent.
+3. **Clean the reply:** surrounding whitespace, quotes, and periods are stripped.
+4. **Validate:** the cleaned reply is compared (case-insensitive) against the category list. A match returns the official spelling. Anything else returns `"I don't know"`.
+
+The model's output is never trusted blindly, so the function can only return a value from the approved list or the fallback.
+
+## Configuration
+
+All settings are constants at the top of `classify_email.py`:
+
+| Constant | Purpose | Default |
+|---|---|---|
+| `CATEGORIES` | Valid categories | `["Missed Pickup", "Schedule Change", "Complaint", "Other"]` |
+| `FALLBACK` | Returned when uncertain or invalid | `"I don't know"` |
+| `MODEL` | OpenAI model used | `"gpt-4o-mini"` |
+
+To add a category, append it to `CATEGORIES`. The system prompt is rebuilt from that list automatically.
+
+## Running the tests
+
+pytest
+
+The tests replace `_call_model` with a mock using `unittest.mock.patch`, so they run instantly, cost nothing, and need no API key or internet connection.
+
+| Test | What it checks |
+|---|---|
+| `test_typical_email_returns_category` | "Missed Pickup" reply is returned correctly |
+| `test_schedule_change_returns_category` | "Schedule Change" reply is returned correctly |
+| `test_complaint_returns_category` | "Complaint" reply is returned correctly |
+| `test_other_returns_category` | "Other" reply is returned correctly |
+| `test_ambiguous_email_returns_fallback` | Model says "I don't know" → fallback |
+| `test_empty_input_returns_fallback_without_api_call` | Empty or blank input skips the API |
+| `test_reply_is_normalized` | `" complaint. "` becomes `"Complaint"` |
+| `test_unexpected_reply_returns_fallback` | Invalid reply like `"Spam"` → fallback |
+| `test_prompt_lists_all_categories_and_fallback` | System prompt contains every category and the fallback |
+
+## Limitations
+
+The tests do not call the real OpenAI API, so `_call_model` itself is not covered. Run the function manually once with a real key to verify it.
+Each call classifies a single email and makes one API request. There is no retry or error handling for network or API failures.
+Classification quality depends on the model. Ambiguous emails may fall back to `"I don't know"`.
