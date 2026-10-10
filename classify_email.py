@@ -1,54 +1,70 @@
-"""Email classifier that asks an LLM to pick one of four categories."""
 
-CATEGORIES = ["Missed Pickup", "Schedule Change", "Complaint", "Other"]
+"""Email classifier that uses Gemini to select one of four categories."""
+
+import os
+
+from dotenv import load_dotenv
+from google import genai
+from google.genai import types
+
+load_dotenv()
+
+MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+CATEGORIES = [
+    "Missed Pickup",
+    "Schedule Change",
+    "Complaint",
+    "Other",
+]
+
 FALLBACK = "I don't know"
-MODEL = "gpt-4o-mini"
 
-# System prompt template.
-# - {categories} is filled with the bulleted list of valid categories.
-# - {fallback} is the exact string the model must return when uncertain.
-# The model is told to answer with the category name only, so the reply
-# can be matched directly against CATEGORIES without parsing.
 SYSTEM_PROMPT_TEMPLATE = (
-    "You are an email classifier. Classify the user's email into exactly one "
-    "of these categories:\n{categories}\n\n"
+    "You are an email classifier. Classify the user's email into exactly "
+    "one of these categories:\n{categories}\n\n"
     "Reply with the exact category name and nothing else. "
     'If you are not certain which category fits, reply exactly: "{fallback}".'
 )
 
 SYSTEM_PROMPT = SYSTEM_PROMPT_TEMPLATE.format(
-    categories="\n".join(f"- {c}" for c in CATEGORIES),
+    categories="\n".join(f"- {category}" for category in CATEGORIES),
     fallback=FALLBACK,
 )
 
 
 def _call_model(text: str) -> str:
-    """Send the email to the OpenAI API and return the raw reply text.
+    """Send the email to Gemini and return its raw response."""
 
-    Kept separate so tests can mock it without touching the network.
-    """
-    from openai import OpenAI  # imported lazily so tests don't need the package
+    api_key = os.getenv("GEMINI_API_KEY")
 
-    client = OpenAI()  # reads OPENAI_API_KEY from the environment
-    response = client.chat.completions.create(
+    if not api_key:
+        raise RuntimeError("GEMINI_API_KEY is missing from the environment.")
+
+    client = genai.Client(api_key=api_key)
+
+    response = client.models.generate_content(
         model=MODEL,
-        temperature=0,
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": text},
-        ],
+        contents=text,
+        config=types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT,
+            temperature=0,
+        ),
     )
-    return response.choices[0].message.content or ""
+
+    return response.text or ""
 
 
 def classify_email(text: str) -> str:
-    """Return one of CATEGORIES, or "I don't know" if uncertain or invalid."""
+    """Return a valid category or the fallback label."""
+
     if not text or not text.strip():
-        return FALLBACK  # nothing to classify; skip the API call
+        return FALLBACK
 
     reply = _call_model(text).strip().strip("\"'.").strip()
 
     for category in CATEGORIES:
-        if reply.lower() == category.lower():
+        if reply.casefold() == category.casefold():
             return category
-    return FALLBACK  # covers "I don't know" and any unexpected output
+
+    return FALLBACK
