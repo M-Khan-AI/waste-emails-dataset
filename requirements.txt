@@ -1,2 +1,6 @@
-openai>=1.0.0
+gemini-2.5-flash
+python-dotenv
 pytest>=7.0.0
+pandas
+matplotlib
+scikit-learn
