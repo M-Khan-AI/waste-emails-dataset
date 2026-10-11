@@ -48,15 +48,34 @@ export GEMINI_API_KEY="your-api-key-here"      # macOS / Linux
        GEMINI_MODEL=gemini-2.5-flash
 setx GEMINI_MODEL="your-api-key-here"      # Windows
 
-## Usage
+## How to Run the Evaluation
 
-**Run the script:**
+1. Clone the repository:
 
-```bash
-python evaluate_classifier.py
-```
+   git clone https://github.com/M-Khan-AI/waste-emails-dataset.git
 
-**Generated files:**
+2. Open the project folder:
+
+   cd waste-emails-dataset
+
+3. Create and activate a virtual environment (optional but recommended):
+
+   python -m venv .venv
+   .venv\Scripts\activate
+
+4. Install the required dependencies:
+
+   pip install -r requirements.txt
+
+5. Configure the required API key in your `.env` file if the evaluation uses the Gemini API.
+
+6. Run the evaluation script:
+
+   python evaluate_classifier.py
+
+The script should generate or update the evaluation predictions, evaluation report, and confusion matrix, according to your implementation.
+
+## Generated files:**
 - `evaluation_report.md` — Detailed performance report.
 - `confusion_matrix.png` — Visual representation of classification results.
 - `evaluation_predictions.csv` — Actual and predicted labels for each email.
@@ -84,9 +103,9 @@ All settings are constants at the top of `classify_email.py`:
 
 To add a category, append it to `CATEGORIES`. The system prompt is rebuilt from that list automatically.
 
-## Evaluation Report
+## Evaluation Report Link
+## Ckick the link to see evaluation_report.md
 
-For detailed performance metrics and classification results, see the
 [Evaluation Report](evaluation_report.md).
 
 ## Author:
