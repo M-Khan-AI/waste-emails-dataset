@@ -13,7 +13,8 @@ A small Python module that uses an LLM ("GEMINI_MODEL", gemini-2.5-flash)to sort
 | `I don't know` (fallback) | Empty input, ambiguous email, or invalid model output |
 
 ## Project structure
-.
+waste-email-dataset
+|
 ├── evaluate_classifier.py     # The it classifies the categories
 ├── evaluation_predicions.csv  # Actual and predicted labels
 ├── evaluation_report.md       # Shows metrics, category-wise results, errors, and limitations.
