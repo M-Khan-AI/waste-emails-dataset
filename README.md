@@ -18,6 +18,7 @@ A small Python module that uses an LLM ("GEMINI_MODEL", gemini-2.5-flash)to sort
 ├── evaluation_predicions.csv  # Actual and predicted labels
 ├── evaluation_report.md       # Shows metrics, category-wise results, errors, and limitations.
 ├── confusion_matrix.png       # Shows the data in a graph
+├── requirements.txt           # Stores python libraries and packages to run
 └── README.md                  # Complete detail about the project
 
 ## Requirements
