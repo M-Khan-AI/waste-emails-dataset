@@ -1,4 +1,3 @@
-
 """Email classifier that uses Gemini to select one of four categories."""
 
 import os
@@ -8,6 +7,14 @@ from google import genai
 from google.genai import types
 
 load_dotenv()
+
+
+# Define the exception here so app.py can import it
+class ClassificationError(Exception):
+  """Custom exception for email classification errors."""
+
+  pass
+
 
 MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 
@@ -34,15 +41,14 @@ SYSTEM_PROMPT = SYSTEM_PROMPT_TEMPLATE.format(
 
 
 def _call_model(text: str) -> str:
-    """Send the email to Gemini and return its raw response."""
+  """Send the email to Gemini and return its raw response."""
+  api_key = os.getenv("GEMINI_API_KEY")
 
-    api_key = os.getenv("GEMINI_API_KEY")
+  if not api_key:
+    raise RuntimeError("GEMINI_API_KEY is missing from the environment.")
 
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY is missing from the environment.")
-
+  try:
     client = genai.Client(api_key=api_key)
-
     response = client.models.generate_content(
         model=MODEL,
         contents=text,
@@ -51,20 +57,20 @@ def _call_model(text: str) -> str:
             temperature=0,
         ),
     )
-
     return response.text or ""
+  except Exception as e:
+    raise ClassificationError(f"Failed to classify email: {e}") from e
 
 
 def classify_email(text: str) -> str:
-    """Return a valid category or the fallback label."""
-
-    if not text or not text.strip():
-        return FALLBACK
-
-    reply = _call_model(text).strip().strip("\"'.").strip()
-
-    for category in CATEGORIES:
-        if reply.casefold() == category.casefold():
-            return category
-
+  """Return a valid category or the fallback label."""
+  if not text or not text.strip():
     return FALLBACK
+
+  reply = _call_model(text).strip().strip("\"'.").strip()
+
+  for category in CATEGORIES:
+    if reply.casefold() == category.casefold():
+      return category
+
+  return FALLBACK
