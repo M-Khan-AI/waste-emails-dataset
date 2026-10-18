@@ -1,0 +1,20 @@
+.git
+.gitignore
+.env
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.vscode/
+.idea/
+
+# Not needed at runtime
+*.csv
+*.png
+*.md
+test_*.py
+evaluate_classifier.py
+validate_csv.py
+requirements-dev.txt
+docker-compose.yml
