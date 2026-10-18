@@ -1,6 +1,7 @@
-gemini-2.5-flash
+google-genai
 python-dotenv
 pytest>=7.0.0
 pandas
 matplotlib
 scikit-learn
+gunicorn
