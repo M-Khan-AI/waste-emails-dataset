@@ -1,112 +1,72 @@
-# Email Classifier
+## CleanCity Email Classifier
 
-A small Python module that uses an LLM ("GEMINI_MODEL", gemini-2.5-flash)to sort an email into one of four categories. If the model is unsure, or returns anything unexpected, the classifier returns `"I don't know"`.
+A minimal Flask web app. Paste an email, click **Classify**, and see its predicted
+category: **Missed Pickup**, **Schedule Change**, **Complaint**, or **Other**. If the
+model is unsure, the app shows **I don't know**. Classification uses Google Gemini.
 
-## Categories
+# Project structure
 
-| Category | Typical email |
+| File | Purpose |
 |---|---|
-| `Missed Pickup` | "My garbage was not collected today." |
-| `Schedule Change` | "I want to change my collection day." |
-| `Complaint` | "The service is very poor." |
-| `Other` | "I would like some general information." |
-| `I don't know` (fallback) | Empty input, ambiguous email, or invalid model output |
+| `app.py` | Flask routes and input validation |
+| `classify_email.py` | Classification logic and API error handling |
+| `templates/index.html` | The single web page |
+| `Dockerfile` | Slim production image (Gunicorn) |
+| `docker-compose.yml` | Optional one-command startup |
+| `evaluate_classifier.py`, `validate_csv.py` | Dataset validation and accuracy evaluation |
+| `test_classify_email.py`, `test_app.py` | Automated tests (no API key needed) |
 
-## Project structure
-waste-email-dataset
-|
-├── evaluate_classifier.py     # The it classifies the categories
-├── evaluation_predicions.csv  # Actual and predicted labels
-├── evaluation_report.md       # Shows metrics, category-wise results, errors, and limitations.
-├── confusion_matrix.png       # Shows the data in a graph
-├── requirements.txt           # Stores python libraries and packages to run
-└── README.md                  # Complete detail about the project
-
-## Requirements
-
-- Python 3.8+
-- pandas
-- matplotlib
-- scikit-learn
-- gemini-2.5-flash
-- python-dotenv
-
-## Setup
+# Setup
 
 ```bash
-pip install pandas
-pip install matplotlib
-pip install scikit-learn
-pip install-genai
+git clone <your-repo-url>
+cd <repo-folder>
+cp .env.sample .env        # Windows: copy .env.sample .env
 ```
-## API Key Setup
-1. create api key in google ai studio
-2. create .env file in root
-3.  copy api key and paste in .env
 
-export GEMINI_API_KEY="your-api-key-here"      # macOS / Linux
-       GEMINI_MODEL=gemini-2.5-flash
-setx GEMINI_MODEL="your-api-key-here"      # Windows
+Edit `.env` and set `GEMINI_API_KEY` (free key: https://aistudio.google.com/apikey).
 
-## How to Run the Evaluation
+# Run with Docker
 
-1. Clone the repository:
+docker build -t email-classifier .
+docker run --env-file .env -p 5000:5000 email-classifier
 
-   git clone https://github.com/M-Khan-AI/waste-emails-dataset.git
+Open http://localhost:5000.
 
-2. Open the project folder:
+# Run with Docker Compose (optional)
 
-   cd waste-emails-dataset
+docker compose up --build
 
-3. Create and activate a virtual environment (optional but recommended):
+# Run locally without Docker
 
-   python -m venv .venv
-   .venv\Scripts\activate
+python -m venv venv
+source venv/bin/activate          # Windows: venv\Scripts\activate
+pip install -r requirements-dev.txt
+python app.py
 
-4. Install the required dependencies:
+# Run the tests
 
-   pip install -r requirements.txt
+pip install -r requirements-dev.txt
+pytest
 
-5. Configure the required API key in your `.env` file if the evaluation uses the Gemini API.
+# Error handling
 
-6. Run the evaluation script:
+| Situation | What the user sees |
+|---|---|
+| Empty input | "Please paste an email before submitting." |
+| Email over 8,000 characters | "The email is too long..." |
+| Missing or invalid API key | A message asking them to contact the administrator |
+| Rate limit (HTTP 429) | "Too many requests. Please wait a minute and try again." |
+| Network error or timeout | "Could not reach the classification service..." |
+| Any other failure | "Something went wrong. Please try again." (logged on the server) |
 
-   python evaluate_classifier.py
+# Deployment notes
 
-The script should generate or update the evaluation predictions, evaluation report, and confusion matrix, according to your implementation.
-
-## Generated files:**
-- `evaluation_report.md` — Detailed performance report.
-- `confusion_matrix.png` — Visual representation of classification results.
-- `evaluation_predictions.csv` — Actual and predicted labels for each email.
-
-**Note:** Configure the Gemini API key and install the required dependencies before running the script.
-
-## How it works
-
-1. **Empty check:** blank or whitespace-only input returns `"I don't know"` immediately, with no API call.
-2. **Ask the model:** the email is sent to `gemini-2.5-flash` with a system prompt that lists the valid categories and asks for the exact category name only. `temperature=0` keeps answers consistent.
-3. **Clean the reply:** surrounding whitespace, quotes, and periods are stripped.
-4. **Validate:** the cleaned reply is compared (case-insensitive) against the category list. A match returns the official spelling. Anything else returns `"I don't know"`.
-
-The model's output is never trusted blindly, so the function can only return a value from the approved list or the fallback.
-
-## Configuration
-
-All settings are constants at the top of `classify_email.py`:
-
-| Constant | Purpose | Default |
-|---|---|---|
-| `CATEGORIES` | Valid categories | `["Missed Pickup", "Schedule Change", "Complaint", "Other"]` |
-| `FALLBACK` | Returned when uncertain or invalid | `"I don't know"` |
-| `MODEL` | gemini model used | `"gemini-2.5-flash"` |
-
-To add a category, append it to `CATEGORIES`. The system prompt is rebuilt from that list automatically.
-
-## Evaluation Report Link
-## Ckick the link to see evaluation_report.md
-
-[Evaluation Report](evaluation_report.md).
-
-## Author:
-Muhammad Khan
+- The container runs Gunicorn on port 5000 as a non-root user.
+- The API key is supplied at runtime (`--env-file` or the host's secret manager) and is
+  never baked into the image, because `.env` is excluded by `.dockerignore`.
+- Works on any container host (Render, Railway, Fly.io, Google Cloud Run, AWS ECS, a VPS).
+  Set `GEMINI_API_KEY` as an environment variable on the platform.
+- Serve over HTTPS using the platform's load balancer or a reverse proxy.
+- `GET /health` returns `{"status": "ok"}` for health checks.
+- Check the image size with `docker images email-classifier` (target: under 200 MB).
