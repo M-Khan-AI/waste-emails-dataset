@@ -47,18 +47,15 @@ The script creates `.env`, asks for your `GEMINI_API_KEY`, adds `.env` to `.giti
 
 ### 1. Clone and configure
 
-```bash
 git clone <your-repo-url>
 cd <repo-folder>
 cp .env.sample .env        # Windows: copy .env.sample .env
-```
 
 Edit `.env` and set `GEMINI_API_KEY`.
 
 ### 2a. Run with Docker
 
 docker build -t email-classifier .
-docker run --env-file .env -p 5000:5000 email-classifier
 
 ### 2b. Run with Docker Compose
 
@@ -70,7 +67,6 @@ python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 pip install -r requirements-dev.txt
 python app.py
-```
 
 ## Verify
 
