@@ -171,23 +171,6 @@ python evaluate_classifier.py
 
 The evaluation script requires a valid Gemini API key. Review `evaluation_report.md` for the measured results, if the evaluation has been completed successfully.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Troubleshooting
 
 | Problem | Fix |
@@ -207,8 +190,6 @@ The evaluation script requires a valid Gemini API key. Review `evaluation_report
 | Rate limit (HTTP 429) | "Too many requests. Please wait a minute and try again." |
 | Network error or timeout | "Could not reach the classification service..." |
 | Any other failure | "Something went wrong. Please try again." (logged on the server) |
-
-# Deployment notes
 
 ## Deployment Guide
 
@@ -302,15 +283,3 @@ Review `evaluation_report.md` after a successful evaluation.
 - Monitor API usage and configure appropriate quotas.
 - Add optional prediction logging with suitable privacy controls.
 - Improve the evaluation dataset and re-evaluate the model after changes.
-
-### 7. Handover Checklist
-
-Before handing over the application to CleanCity Services, confirm that:
-
-- [ ] The application starts successfully.
-- [ ] The health endpoint responds correctly.
-- [ ] The automated tests pass.
-- [ ] The API key is configured securely.
-- [ ] The deployment instructions match the chosen hosting platform.
-- [ ] The latest evaluation report is available, if evaluation has been completed.
-- [ ] The client understands how to start, stop, and troubleshoot the application.
