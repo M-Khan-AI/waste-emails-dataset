@@ -17,75 +17,176 @@ model is unsure, the app shows **I don't know**. Classification uses Google Gemi
 | `test_classify_email.py`, `test_app.py` | Automated tests (no API key needed) |
 
 
-## Setup
+## Manual Setup
 
-## Prerequisites
+### Prerequisites
 
+Before running the application, install:
+
+- Python 3.10 or newer
+- Docker Desktop (if using Docker)
 - Git
-- Python 3.10+ (for local run)
-- Docker Desktop (for Docker run)
-- A Gemini API key (free): https://aistudio.google.com/apikey
+- A Gemini API key from https://aistudio.google.com/apikey
 
-## Quick setup (one script)
+### Option A: Run Locally
+
+**Step 1: Clone the repository**
 
 ```bash
 git clone <your-repo-url>
 cd <repo-folder>
-chmod +x setup.sh
-./setup.sh            # local: venv + dependencies + tests + start app
-./setup.sh docker     # build the Docker image and run it
-./setup.sh compose    # docker compose up --build
 ```
 
-Open http://localhost:5000.
+Replace `<your-repo-url>` and `<repo-folder>` with your actual repository URL and folder name.
 
-On Windows, run `setup.sh` from Git Bash or WSL. If port 5000 is busy, run `PORT=5001 ./setup.sh docker`.
+**Step 2: Create a virtual environment**
 
-The script creates `.env`, asks for your `GEMINI_API_KEY`, adds `.env` to `.gitignore`, and then runs the mode you chose.
-
-## Manual setup
-
-### 1. Clone and configure
-
-git clone <your-repo-url>
-cd <repo-folder>
-cp .env.sample .env        # Windows: copy .env.sample .env
-
-Edit `.env` and set `GEMINI_API_KEY`.
-
-### 2a. Run with Docker
-
-docker build -t email-classifier .
-
-### 2b. Run with Docker Compose
-
-docker compose up --build
-
-### 2c. Run locally without Docker
-
+```bash
 python -m venv venv
-source venv/bin/activate          # Windows: venv\Scripts\activate
+```
+
+**Step 3: Activate the virtual environment**
+
+Windows PowerShell:
+
+```powershell
+.\venv\Scripts\Activate.ps1
+```
+
+Windows Git Bash:
+
+```bash
+source venv/Scripts/activate
+```
+
+Linux or macOS:
+
+```bash
+source venv/bin/activate
+```
+
+**Step 4: Install dependencies**
+
+```bash
 pip install -r requirements-dev.txt
+```
+
+**Step 5: Configure the API key**
+
+Create a `.env` file in the project root using `.env.sample` as a template, if that sample file exists.
+
+Add your key:
+
+```text
+GEMINI_API_KEY=your_actual_api_key
+```
+
+Never commit your real API key to GitHub.
+
+**Step 6: Start the application**
+
+```bash
 python app.py
+```
 
-## Verify
+**Step 7: Open the application**
 
-curl http://localhost:5000/health
-# {"status": "ok"}
+Visit http://localhost:5000 in your browser.
 
-Open http://localhost:5000, paste an email, and click **Classify**.
+**Step 8: Verify the application**
 
-## Run the tests
+Open http://localhost:5000/health. A successful health check should return:
 
+```json
+{"status": "ok"}
+```
+
+### Option B: Run with Docker
+
+**Step 1:** Configure `GEMINI_API_KEY` in your `.env` file.
+
+**Step 2: Build the Docker image**
+
+```bash
+docker build -t email-classifier .
+```
+
+**Step 3: Start the container**
+
+```bash
+docker run --env-file .env -p 5000:5000 email-classifier
+```
+
+**Step 4:** Open http://localhost:5000 in your browser.
+
+**Step 5:** Verify the health endpoint at http://localhost:5000/health.
+
+To stop the container, press `Ctrl+C` in the terminal running it.
+
+### Option C: Run with Docker Compose
+
+**Step 1:** Make sure Docker Desktop is running and the `.env` file contains your API key.
+
+**Step 2: Start the application**
+
+```bash
+docker compose up --build
+```
+
+**Step 3:** Open http://localhost:5000.
+
+**Step 4: Stop the application**
+
+```bash
+docker compose down
+```
+
+### Run Automated Tests
+
+Install the development dependencies if you have not already done so:
+
+```bash
 pip install -r requirements-dev.txt
-pytest
+```
 
-## Evaluate accuracy (optional)
+Run the tests:
+
+```bash
+pytest
+```
+
+### Evaluate the Classifier (Optional)
+
+Validate the dataset:
 
 ```bash
 python validate_csv.py
-python evaluate_classifier.py      # requires a valid GEMINI_API_KEY
 ```
+
+Evaluate the classifier:
+
+```bash
+python evaluate_classifier.py
+```
+
+The evaluation script requires a valid Gemini API key. Review `evaluation_report.md` for the measured results, if the evaluation has been completed successfully.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Troubleshooting
 
@@ -109,33 +210,107 @@ python evaluate_classifier.py      # requires a valid GEMINI_API_KEY
 
 # Deployment notes
 
-- The container runs Gunicorn on port 5000 as a non-root user.
-- The API key is supplied at runtime (`--env-file` or the host's secret manager) and is
-  never baked into the image, because `.env` is excluded by `.dockerignore`.
-- Works on any container host (Render, Railway, Fly.io, Google Cloud Run, AWS ECS, a VPS).
-  Set `GEMINI_API_KEY` as an environment variable on the platform.
-- Serve over HTTPS using the platform's load balancer or a reverse proxy.
-- `GET /health` returns `{"status": "ok"}` for health checks.
-- Check the image size with `docker images email-classifier` (target: under 200 MB).
+## Deployment Guide
+
+The application can be deployed to a container hosting platform that supports Docker, such as Render, Railway, Fly.io, Google Cloud Run, AWS ECS, or a VPS.
+
+### Deployment Steps
+
+1. **Prepare the application:** Confirm that the Dockerfile builds successfully on your local machine.
+2. **Prepare the API key:** Obtain a valid Gemini API key and configure it as the `GEMINI_API_KEY` environment variable in the hosting platform's environment-variable or secrets settings.
+3. **Deploy the application:** Connect the repository or upload the container image according to the selected platform's deployment process.
+4. **Configure the port:** Ensure the platform routes HTTP traffic to the application's configured listening port, which is 5000 for this project unless the deployment configuration specifies otherwise.
+5. **Configure HTTPS:** Use the hosting platform's HTTPS support or a reverse proxy with a valid TLS certificate.
+6. **Verify deployment:** Visit the deployed application's URL and check its `/health` endpoint. A successful health check should return `{"status": "ok"}`.
+7. **Check logs:** If classification fails, review the hosting platform's logs for server-side errors.
+
+### Security and Operations
+
+- Never commit `.env` or expose the Gemini API key in source code, logs, or public documentation.
+- Keep secrets in the hosting platform's secret manager or environment-variable settings.
+- Set appropriate API quotas and monitor usage.
+- Use authentication or rate limiting before exposing the application to unrestricted public traffic.
+- Review application logs and re-run classifier evaluation after changing the prompt, categories, or model.
+- Check the container size with `docker images email-classifier`.
+
+The actual deployment steps, port configuration, and environment-variable settings depend on the selected hosting platform. Follow that platform's documentation before deploying to production.
 
 ## Hand-over summary (for the client)
 
-**What was built:** A single-page web app that sorts CleanCity emails into four
-categories using Gemini.
+### 1. Project Overview
 
-**How it works:** The browser posts the email text to Flask. `app.py` validates it and
-calls `classify_email.py`, which sends it to Gemini with a prompt that allows only the
-four categories or "I don't know". Anything outside that list becomes "I don't know".
+The CleanCity Email Classifier is a single-page Flask web application that uses Google Gemini to classify incoming CleanCity service emails into the supported categories:
 
-**Common changes:**
-- Categories: edit `CATEGORIES` in `classify_email.py`, and update `emails_labeled.csv` and `validate_csv.py` to match.
-- Model: set `GEMINI_MODEL` in `.env`.
+- Missed Pickup
+- Schedule Change
+- Complaint
+- Other
 
-**Known limitations:**
-- No login: anyone with the URL can use the app and consume your API quota.
-- No rate limiting, database, or stored history.
-- The free Gemini tier has low request limits, so heavy use may return "Too many requests".
-- Predictions come from an AI model and can be wrong; check `evaluation_report.md` for measured accuracy.
-**Suggested next steps:** add authentication or rate limiting, set a spending/quota
-cap on the API key, log predictions for review, and re-run `evaluate_classifier.py`
-after any prompt or category change.
+When the model cannot confidently provide a valid category, the application displays `I don't know`.
+
+### 2. How to Use the Application
+
+1. Start the application using the local, Docker, or Docker Compose instructions above.
+2. Open the application URL in a web browser.
+3. Paste the email text into the input field.
+4. Click **Classify**.
+5. Review the predicted category.
+6. If an error appears, follow the troubleshooting instructions in this README.
+
+### 3. How to Maintain the Application
+
+**Update the API key:** Change `GEMINI_API_KEY` in the local `.env` file or hosting platform's secret settings. Restart or redeploy the application if required.
+
+**Change the Gemini model:** Update `GEMINI_MODEL` if this setting is supported by the classifier configuration. Confirm that the selected model is available for the configured API key.
+
+**Change categories:** Update the category definitions and classification prompt in the classifier code. Update `emails_labeled.csv`, dataset validation rules, tests, and evaluation logic to match. Run the tests and evaluate the classifier before releasing changes.
+
+**Run tests:**
+
+```bash
+pytest
+```
+
+**Evaluate performance:**
+
+```bash
+python validate_csv.py
+python evaluate_classifier.py
+```
+
+Review `evaluation_report.md` after a successful evaluation.
+
+### 4. Troubleshooting
+
+- **API key error:** Check that `GEMINI_API_KEY` is configured correctly.
+- **Rate limit error:** Wait before retrying and check the Gemini API quota.
+- **Network error:** Check the internet connection and hosting platform status.
+- **Application unavailable:** Check the container status and server logs.
+- **Unexpected category:** Review the prompt and evaluation results before changing the classifier.
+
+### 5. Known Limitations
+
+- The application does not provide user authentication.
+- Request rate limiting, a database, and classification history are not included.
+- Gemini API limits may restrict usage.
+- AI predictions can be incorrect and should be reviewed where necessary.
+- Classification quality depends on the prompt, model, and evaluation dataset.
+
+### 6. Recommended Future Improvements
+
+- Add authentication and request rate limiting.
+- Monitor API usage and configure appropriate quotas.
+- Add optional prediction logging with suitable privacy controls.
+- Improve the evaluation dataset and re-evaluate the model after changes.
+
+### 7. Handover Checklist
+
+Before handing over the application to CleanCity Services, confirm that:
+
+- [ ] The application starts successfully.
+- [ ] The health endpoint responds correctly.
+- [ ] The automated tests pass.
+- [ ] The API key is configured securely.
+- [ ] The deployment instructions match the chosen hosting platform.
+- [ ] The latest evaluation report is available, if evaluation has been completed.
+- [ ] The client understands how to start, stop, and troubleshoot the application.
